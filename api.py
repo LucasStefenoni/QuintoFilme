@@ -49,12 +49,12 @@ def gerar_embedding_leve(texto: str):
 
 
 with open("embeddings_fixos.pkl", "rb") as f:
-    dados_salvos = pickle.load(f)
-    
-embeddings_fixos = np.array(dados_salvos["embeddings"]).astype(np.float32)
-filmes_catalogo = dados_salvos["filmes"]
+    embeddings_fixos = np.array(pickle.load(f)).astype(np.float32)
 
-knn = NearestNeighbors(n_neighbors=20, metric="cosine")
+with open("catalogo_fixo.json", "r", encoding="utf-8") as f:
+    filmes_catalogo = json.load(f)
+
+knn = NearestNeighbors(n_neighbors=10, metric="cosine")
 knn.fit(embeddings_fixos)
 
 
@@ -124,7 +124,7 @@ def recomendar(username: str):
                 })
             
             resultados_finais.append({
-                "filme_favorito": filme_fav["titulo"],
+                "filme_favorito": filme_fav["title"],
                 "recomendacoes": lista_recomendacoes[:5]
             })
             
