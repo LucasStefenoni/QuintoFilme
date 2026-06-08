@@ -109,7 +109,7 @@ def ler_pickle(arquivo):
         print(f"Erro: O arquivo {arquivo} não foi encontrado!")
         exit()
 
-model = SentenceTransformer("all-MiniLM-L6-v2")    
+model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")   
 catalogo_fixo = ler_json("catalogo_fixo.json")
 ids_salvos = {filme['id'] for filme in catalogo_fixo}
 embeddings_fixos = ler_pickle("embeddings_fixos.pkl")
