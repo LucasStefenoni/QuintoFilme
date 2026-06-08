@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -26,10 +27,17 @@ app.add_middleware(
 )
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
-ort_session = ort.InferenceSession(
-    "model.onnx" if hasattr(tokenizer, 'model_input_names') else tokenizer.model_input_names[0], 
-    providers=['CPUExecutionProvider']
-)
+MODEL_PATH = "model.onnx"
+if not os.path.exists(MODEL_PATH):
+    url_onnx = "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/onnx/model.onnx"
+    response_model = requests.get(url_onnx, stream=True)
+    if response_model.status_code == 200:
+        with open(MODEL_PATH, "wb") as f:
+            for chunk in response_model.iter_content(chunk_size=8192):
+                f.write(chunk)
+    else:
+        raise RuntimeError("Falha ao baixar o modelo ONNX do Hugging Face Hub.")
+ort_session = ort.InferenceSession(MODEL_PATH, providers=['CPUExecutionProvider'])
 
 def gerar_embedding_leve(texto: str):
     if not texto:
