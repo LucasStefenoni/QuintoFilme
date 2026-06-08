@@ -54,7 +54,7 @@ with open("embeddings_fixos.pkl", "rb") as f:
 with open("catalogo_fixo.json", "r", encoding="utf-8") as f:
     filmes_catalogo = json.load(f)
 
-knn = NearestNeighbors(n_neighbors=10, metric="cosine")
+knn = NearestNeighbors(n_neighbors=6, metric="cosine")
 knn.fit(embeddings_fixos)
 
 
@@ -119,12 +119,12 @@ def recomendar(username: str):
                 filme_recomendado = filmes_catalogo[idx_catalogo]
                 
                 lista_recomendacoes.append({
-                    "titulo": filme_recomendado["titulo"], 
+                    "titulo": filme_recomendado["title"], 
                     "match": porcentagem_match
                 })
             
             resultados_finais.append({
-                "filme_favorito": filme_fav["title"],
+                "filme_favorito": filme_fav["titulo"],
                 "recomendacoes": lista_recomendacoes[:5]
             })
             
