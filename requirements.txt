@@ -1,5 +1,4 @@
-onnxruntime
-sentence-transformers
+opticorn
 fastapi
 uvicorn
 requests
@@ -7,3 +6,5 @@ beautifulsoup4
 numpy
 scikit-learn
 python-dotenv
+onnxruntime
+transformers
