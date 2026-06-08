@@ -1,4 +1,3 @@
-opticorn
 fastapi
 uvicorn
 requests
