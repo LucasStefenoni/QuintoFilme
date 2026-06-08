@@ -145,7 +145,7 @@ def recomendar(username: str):
             
             resultados_finais.append({
                 "filme_favorito": fav["title"],
-                "recomendacoes": lista_recomendacoes[:5]
+                "recomendacoes": lista_recomendacoes[1:6]
             })
             
         gc.collect()
