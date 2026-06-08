@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from sentence_transformers import SentenceTransformer
 import pickle
+import gc
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -201,3 +202,4 @@ def recomendar_filmes(username: str):
 
     except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+            gc.collect()
