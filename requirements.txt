@@ -1,8 +1,10 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2+cpu
+sentence-transformers
 fastapi
 uvicorn
 requests
 beautifulsoup4
 numpy
 scikit-learn
-sentence-transformers
-dotenv
+python-dotenv
