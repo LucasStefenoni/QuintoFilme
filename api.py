@@ -15,7 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from tmdb import buscar_filme_por_id_no_tmdb, pegar_recomendacoes_por_id
 
-app = FastAPI("API QuintoFilme")
+app = FastAPI(title="API QuintoFilme")
 
 app.add_middleware(
     CORSMiddleware,
